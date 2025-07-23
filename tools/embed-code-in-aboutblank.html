@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VE - about:blank embed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2            0px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #0056b3;
+        }
+        textarea {
+            width: 98%;
+            height: 150px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VE - about:blank embed</h1>
+
+        <p>Enter your HTML, CSS, and JavaScript below to embed it into a new "about:blank" page.</p>
+
+        <label for="htmlCode">HTML Code:</label>
+        <textarea id="htmlCode" placeholder="<h1>Hello from about:blank!</h1>
+        <p>This is some content.</p>"></textarea>
+
+        <label for="cssCode">CSS Code:</label>
+        <textarea id="cssCode" placeholder="/* Your CSS styles here */
+        h1 { color: blue; }
+        p { font-size: 18px; }"></textarea>
+
+        <label for="jsCode">JavaScript Code:</label>
+        <textarea id="jsCode" placeholder="// Your JavaScript code here
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Script loaded in about:blank!');
+            const p = document.querySelector('p');
+            if (p) {
+                p.textContent += ' (Modified by JS)';
+            }
+        });"></textarea>
+
+        <button onclick="embedContent()">Embed Content</button>
+    </div>
+
+    <script>
+        function embedContent() {
+            const html = document.getElementById('htmlCode').value;
+            const css = document.getElementById('cssCode').value;
+            const js = document.getElementById('jsCode').value;
+
+            const newWindow = window.open('about:blank', '_blank');
+
+            if (!newWindow) {
+                alert('Pop-up blocked! Please allow pop-ups for this site to use the embedder.');
+                return;
+            }
+
+            newWindow.onload = () => {
+                const newDoc = newWindow.document;
+
+                newDoc.open();
+                newDoc.write('');
+                newDoc.close();
+
+                newDoc.body.innerHTML = html;
+
+                if (css) {
+                    const style = newDoc.createElement('style');
+                    style.textContent = css;
+                    newDoc.head.appendChild(style);
+                }
+
+                if (js) {
+                    const script = newDoc.createElement('script');
+                    script.textContent = js;
+                    newDoc.body.appendChild(script);
+                }
+            };
+        }
+    </script>
+</body>
+</html>
