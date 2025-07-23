@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Saver</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        textarea {
+            width: 80%;
+            height: 300px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 15px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Code Saver</h1>
+
+    <textarea id="codeEditor" placeholder="Enter your code here..."></textarea>
+
+    <div class="controls">
+        <label for="filename">Filename:</label>
+        <input type="text" id="filename" value="my_code" placeholder="e.g., my_script">
+        <label for="extension">.</label>
+        <input type="text" id="extension" value="txt" placeholder="e.g., js, html, py">
+        <button onclick="saveCode()">Save Code</button>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <script>
+        function saveCode() {
+            const code = document.getElementById('codeEditor').value;
+            const filenameInput = document.getElementById('filename').value.trim();
+            const extensionInput = document.getElementById('extension').value.trim();
+            const messageDiv = document.getElementById('message');
+
+            if (!code) {
+                messageDiv.textContent = 'Please enter some code to save.';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            if (!filenameInput) {
+                messageDiv.textContent = 'Please enter a filename.';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+
+            const fullFilename = `${filenameInput}.${extensionInput}`;
+
+  
+            const blob = new Blob([code], { type: 'text/plain' });
+
+         
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = fullFilename; 
+
+            // Append the link to the body (not strictly necessary for modern browsers but good practice)
+            document.body.appendChild(a);
+
+            
+            a.click();
+
+            
+            URL.revokeObjectURL(a.href);
+
+          
+            document.body.removeChild(a);
+
+            messageDiv.textContent = `File "${fullFilename}" downloaded successfully!`;
+            messageDiv.style.color = 'green';
+        }
+    </script>
+</body>
+</html>
