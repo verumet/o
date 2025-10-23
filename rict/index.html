@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Verb Conjugator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+        }
+        .app-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .verb-card {
+            background-color: #2a2a2a;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border: 1px solid #3d3d3d;
+        }
+        .conjugation-table td {
+            padding: 10px 0;
+            border-bottom: 1px solid #3a3a3a;
+        }
+        .conjugation-table tr:last-child td {
+            border-bottom: none;
+        }
+        .copy-btn {
+            background: none;
+            border: none;
+            color: #60a5fa; /* Blue-500 */
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.15s;
+            outline: none;
+            padding: 4px 6px;
+            border-radius: 4px;
+        }
+        .copy-btn:hover {
+            color: #93c5fd; /* Blue-300 */
+        }
+        .input-focus:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.5);
+        }
+        /* Custom scrollbar for output area */
+        #rict-output::-webkit-scrollbar {
+            width: 8px;
+        }
+        #rict-output::-webkit-scrollbar-track {
+            background: #2a2a2a;
+        }
+        #rict-output::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 4px;
+        }
+        #rict-output::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container p-4">
+        <div id="rict-hud" class="verb-card rounded-xl w-full max-w-sm">
+            <div id="rict-header" class="bg-gray-800 text-white p-4 text-lg font-bold rounded-t-xl flex justify-between items-center border-b border-gray-700">
+                <span>🇪🇸 Verb Conjugator</span>
+                <button onclick="window.parent.postMessage({action: 'closeIframe'}, '*')"
+                        class="text-gray-400 hover:text-white transition-colors text-2xl leading-none">&times;</button>
+            </div>
+            <div class="p-4">
+                <input type="text" id="rict-input" placeholder="Loading data..."
+                       class="w-full p-3 rounded-lg bg-gray-700 text-white text-base border border-gray-600 input-focus mb-3"
+                       disabled>
+                <div id="rict-output" class="max-h-80 overflow-y-auto text-sm">
+                    <div class="text-yellow-300 text-center py-4 font-semibold">Loading verb data... Please wait.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Start of Immediately Invoked Function Expression (IIFE) to create a private scope
+        (function() {
+            // --- Core Configuration and Data Stores ---
+            // List of JSON endpoints to fetch verb data from. Add more URLs here to load additional data sets.
+            const JSON_SOURCES = [
+                'https://verumet.github.io/o/rict/v1.json'
+            ];
+            
+            // This object will store all the merged verb data after fetching.
+            let ALL_VERBS = {};
+            let isDataLoaded = false;
+
+            const PRONOUNS = [
+                {key: 'yo', display: 'Yo (I)'},
+                {key: 'tu', display: 'Tú (You, inf.)'},
+                {key: 'el', display: 'Él/Ella/Ud. (He/She/You, f.)'},
+                {key: 'nosotros', display: 'Nosotros(as) (We)'},
+                {key: 'vosotros', display: 'Vosotros(as) (You, pl. inf.)'},
+                {key: 'ellos', display: 'Ellos(as)/Uds. (They/You, pl. f.)'}
+            ];
+
+            const inputEl = document.getElementById('rict-input');
+            const outputEl = document.getElementById('rict-output');
+            const headerEl = document.getElementById('rict-header');
+            const hudEl = document.getElementById('rict-hud');
+
+            // --- Data Loading Function ---
+
+            /**
+             * Fetches verb data from all sources listed in JSON_SOURCES and populates ALL_VERBS.
+             */
+            async function fetchVerbData() {
+                try {
+                    // Create an array of fetch promises for all sources
+                    const fetchPromises = JSON_SOURCES.map(url => fetch(url).then(res => {
+                        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status} from ${url}`);
+                        return res.json();
+                    }));
+                    
+                    // Wait for all promises to resolve
+                    const results = await Promise.all(fetchPromises);
+                    
+                    // Merge all JSON results into ALL_VERBS
+                    results.forEach(data => {
+                        Object.assign(ALL_VERBS, data);
+                    });
+
+                    isDataLoaded = true;
+                    inputEl.disabled = false;
+                    inputEl.placeholder = "Search infinitive (e.g., abrir, ser)";
+                    updateOutput(); // Display initial prompt
+                    inputEl.focus();
+                    console.log(`Successfully loaded ${Object.keys(ALL_VERBS).length} verbs.`);
+
+                } catch (error) {
+                    console.error("Failed to load verb data:", error);
+                    // Display error message to the user
+                    outputEl.innerHTML = `
+                        <div class="text-red-500 text-center py-4 font-semibold">
+                            Error loading data. Could not fetch JSON from a source. 
+                            (Check console for details on ${error.message})
+                        </div>
+                    `;
+                    inputEl.placeholder = "Data load failed.";
+                }
+            }
+
+
+            // --- Utility Functions ---
+
+            // Function to copy text to clipboard
+            function copyToClipboard(text, button) {
+                const el = document.createElement('textarea');
+                el.value = text;
+                document.body.appendChild(el);
+                el.select();
+                try {
+                    document.execCommand('copy');
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '✅ Copied!';
+                    setTimeout(() => button.innerHTML = originalText, 500);
+                } catch (err) {
+                    console.error('Failed to copy text:', err);
+                    button.innerHTML = '❌ Fail';
+                }
+                document.body.removeChild(el);
+            };
+            // Expose to global scope for onclick attributes in dynamically generated HTML
+            window.copyToClipboard = copyToClipboard;
+            
+            // Sets the input field and triggers a new search
+            function setInputAndConjugate(verb) {
+                inputEl.value = verb;
+                updateOutput();
+                inputEl.focus();
+            }
+            window.setInputAndConjugate = setInputAndConjugate; // Expose globally
+
+            // Function to update the displayed conjugations or suggestions
+            function updateOutput() {
+                if (!isDataLoaded) return; // Prevent search before data is ready
+
+                const query = inputEl.value.toLowerCase().trim();
+                outputEl.innerHTML = '';
+
+                // 1. Initial Empty State
+                if (query === '') {
+                    outputEl.innerHTML = '<div class="text-gray-400 text-center py-4">Enter a Spanish infinitive verb to see its Present Tense conjugations.</div>';
+                    return;
+                }
+
+                const verbData = ALL_VERBS[query]; // Use ALL_VERBS
+
+                // 2. Exact Match Found (Display Full Conjugation)
+                if (verbData) {
+                    let html = `
+                        <div class="px-1 pb-2">
+                            <span class="text-lg font-extrabold text-red-400">${query}</span>
+                            <span class="text-gray-400">| ${verbData.en}</span>
+                            <span class="text-xs text-gray-500 block mt-1">Present Tense</span>
+                        </div>
+                        <table class="conjugation-table w-full text-left">
+                    `;
+
+                    PRONOUNS.forEach(p => {
+                        const conjugation = verbData.conj[p.key] || '—'; // Fallback
+                        html += `
+                            <tr>
+                                <td class="w-2/5 text-gray-300">${p.display}</td>
+                                <td class="w-3/5 text-right font-bold text-yellow-300">
+                                    ${conjugation}
+                                    <button class="copy-btn" onclick="copyToClipboard('${conjugation.replace(/'/g, "\\'")}', this)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 inline-block align-text-top">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v2.25c0 .414-.336.75-.75.75H2.25a.75.75 0 0 1-.75-.75V8.5a.75.75 0 0 1 .75-.75h2.25m4.5 0H21.5c.414 0 .75.336.75.75v11.5a.75.75 0 0 1-.75.75H8.25a.75.75 0 0 1-.75-.75V8.5a.75.75 0 0 1 .75-.75Z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 12.5h-5.25v-5.25h5.25v5.25Z" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    html += `</table>`;
+                    outputEl.innerHTML = html;
+                    return; // Stop here if exact match found
+                }
+
+                // 3. Partial Match Search (Suggestions)
+                const allVerbKeys = Object.keys(ALL_VERBS); // Use ALL_VERBS
+                const matchedVerbs = allVerbKeys.filter(verb => 
+                    verb.startsWith(query) || verb.includes(query)
+                ).sort();
+
+                if (matchedVerbs.length > 0) {
+                    const displayLimit = 20; 
+                    const verbsToDisplay = matchedVerbs.slice(0, displayLimit);
+                    
+                    let html = '<div class="text-gray-400 mb-2 font-semibold">Did you mean...? (Click to conjugate)</div><div class="grid grid-cols-2 gap-2">';
+                    
+                    verbsToDisplay.forEach(verb => {
+                        const englishMeaning = ALL_VERBS[verb].en; // Use ALL_VERBS
+                        html += `<button onclick="setInputAndConjugate('${verb}')" 
+                                        class="p-2 text-left bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                                    <span class="font-bold text-yellow-300">${verb}</span> 
+                                    <span class="text-xs text-gray-400 block truncate">(${englishMeaning})</span>
+                                </button>`;
+                    });
+                    
+                    html += '</div>';
+
+                    if (matchedVerbs.length > displayLimit) {
+                        html += `<div class="text-gray-500 text-center mt-3 text-xs">...and ${matchedVerbs.length - displayLimit} more matches. Keep typing to narrow results.</div>`;
+                    }
+
+                    outputEl.innerHTML = html;
+                    return;
+                }
+
+                // 4. No Match Found
+                outputEl.innerHTML = '<div class="text-red-400 text-center py-4 font-semibold">No verbs found matching that search.</div>';
+            }
+
+            // --- Dragging Logic ---
+            let isDragging = false;
+            let x = 0, y = 0, dx = 0, dy = 0; 
+
+            headerEl.onmousedown = (e) => {
+                isDragging = true;
+                x = e.clientX;
+                y = e.clientY;
+                dx = hudEl.offsetLeft - x;
+                dy = hudEl.offsetTop - y;
+                headerEl.style.cursor = 'grabbing';
+                e.preventDefault();
+            };
+
+            document.onmouseup = () => {
+                if (isDragging) {
+                    isDragging = false;
+                    headerEl.style.cursor = 'grab';
+                }
+            };
+
+            document.onmousemove = (e) => {
+                if (!isDragging) return;
+                // Only adjust if the application is not full screen (i.e., not in this environment)
+                if (hudEl.style.position === 'fixed') {
+                    hudEl.style.left = (e.clientX + dx) + 'px';
+                    hudEl.style.top = (e.clientY + dy) + 'px';
+                }
+            };
+
+            // Event listener for input
+            inputEl.oninput = updateOutput;
+
+            // Hide and show logic when embedded in an iframe
+            window.addEventListener('message', (event) => {
+                if (event.data && event.data.action === 'show') {
+                    document.body.style.display = 'flex';
+                    // We need to re-focus after the data is loaded
+                    if (isDataLoaded) {
+                        inputEl.focus();
+                    }
+                } else if (event.data && event.data.action === 'hide') {
+                    document.body.style.display = 'none';
+                }
+            });
+            
+            // --- Initialization ---
+            // Start the data fetching process on load
+            window.onload = fetchVerbData;
+
+        })(); // End of IIFE
+    </script>
+</body>
+</html>
