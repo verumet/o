@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Verb Conjugator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+        }
+        .app-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .verb-card {
+            background-color: #2a2a2a;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border: 1px solid #3d3d3d;
+        }
+        .conjugation-table td {
+            padding: 10px 0;
+            border-bottom: 1px solid #3a3a3a;
+        }
+        .conjugation-table tr:last-child td {
+            border-bottom: none;
+        }
+        .copy-btn {
+            background: none;
+            border: none;
+            color: #60a5fa; /* Blue-500 */
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.15s;
+            outline: none;
+            padding: 4px 6px;
+            border-radius: 4px;
+        }
+        .copy-btn:hover {
+            color: #93c5fd; /* Blue-300 */
+        }
+        .input-focus:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.5);
+        }
+        /* Custom scrollbar for output area */
+        #rict-output::-webkit-scrollbar {
+            width: 8px;
+        }
+        #rict-output::-webkit-scrollbar-track {
+            background: #2a2a2a;
+        }
+        #rict-output::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 4px;
+        }
+        #rict-output::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container p-4">
+        <div id="rict-hud" class="verb-card rounded-xl w-full max-w-sm">
+            <div id="rict-header" class="bg-gray-800 text-white p-4 text-lg font-bold rounded-t-xl flex justify-between items-center border-b border-gray-700">
+                <span>🇪🇸 Verb Conjugator</span>
+                <button onclick="window.parent.postMessage({action: 'closeIframe'}, '*')"
+                        class="text-gray-400 hover:text-white transition-colors text-2xl leading-none">&times;</button>
+            </div>
+            <div class="p-4">
+                <input type="text" id="rict-input" placeholder="Search infinitive (e.g., abrir, ser)"
+                       class="w-full p-3 rounded-lg bg-gray-700 text-white text-base border border-gray-600 input-focus mb-3"
+                       autofocus>
+                <div id="rict-output" class="max-h-80 overflow-y-auto text-sm">
+                    <div class="text-gray-400 text-center py-4">Enter a Spanish infinitive verb to see its Present Tense conjugations.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Start of Immediately Invoked Function Expression (IIFE) to create a private scope
+        (function() {
+            // --- Core Data ---
+            // This data contains a large set of common Spanish verbs and their Present Tense conjugations.
+            const VERB_DATA = {
+                "abrir": {en:"to open",conj:{yo:"abro",tu:"abres",el:"abre",nosotros:"abrimos",vosotros:"abrís",ellos:"abren"}},
+                "acabar": {en:"to finish",conj:{yo:"acabo",tu:"acabas",el:"acaba",nosotros:"acabamos",vosotros:"acabáis",ellos:"acaban"}},
+                "amar": {en:"to love",conj:{yo:"amo",tu:"amas",el:"ama",nosotros:"amamos",vosotros:"amáis",ellos:"aman"}},
+                "apagar": {en:"to turn off",conj:{yo:"apago",tu:"apagas",el:"apaga",nosotros:"apagamos",vosotros:"apagáis",ellos:"apagan"}},
+                "apoyar": {en:"to support",conj:{yo:"apoyo",tu:"apoyas",el:"apoya",nosotros:"apoyamos",vosotros:"apoyáis",ellos:"apoyan"}},
+                "aprender": {en:"to learn",conj:{yo:"aprendo",tu:"aprendes",el:"aprende",nosotros:"aprendemos",vosotros:"aprendéis",ellos:"aprenden"}},
+                "ayudar": {en:"to help",conj:{yo:"ayudo",tu:"ayudas",el:"ayuda",nosotros:"ayudamos",vosotros:"ayudáis",ellos:"ayudan"}},
+                "beber": {en:"to drink",conj:{yo:"bebo",tu:"bebes",el:"bebe",nosotros:"bebemos",vosotros:"bebéis",ellos:"beben"}},
+                "borrar": {en:"to erase",conj:{yo:"borro",tu:"borras",el:"borra",nosotros:"borramos",vosotros:"borráis",ellos:"borran"}},
+                "buscar": {en:"to look for",conj:{yo:"busco",tu:"buscas",el:"busca",nosotros:"buscamos",vosotros:"buscáis",ellos:"buscan"}},
+                "caer": {en:"to fall",conj:{yo:"caigo",tu:"caes",el:"cae",nosotros:"caemos",vosotros:"caéis",ellos:"caen"}},
+                "callarse": {en:"to be silent",conj:{yo:"me callo",tu:"te callas",el:"se calla",nosotros:"nos callamos",vosotros:"os calláis",ellos:"se callan"}},
+                "cambiar": {en:"to change",conj:{yo:"cambio",tu:"cambias",el:"cambia",nosotros:"cambiamos",vosotros:"cambiáis",ellos:"cambian"}},
+                "caminar": {en:"to walk",conj:{yo:"camino",tu:"caminas",el:"camina",nosotros:"caminamos",vosotros:"camináis",ellos:"caminan"}},
+                "cantar": {en:"to sing",conj:{yo:"canto",tu:"cantas",el:"canta",nosotros:"cantamos",vosotros:"cantáis",ellos:"cantan"}},
+                "celebrar": {en:"to celebrate",conj:{yo:"celebro",tu:"celebras",el:"celebra",nosotros:"celebramos",vosotros:"celebráis",ellos:"celebran"}},
+                "cerrar": {en:"to close",conj:{yo:"cierro",tu:"cierras",el:"cierra",nosotros:"cerramos",vosotros:"cerráis",ellos:"cierran"}},
+                "cocinar": {en:"to cook",conj:{yo:"cocino",tu:"cocinas",el:"cocina",nosotros:"cocinamos",vosotros:"cocináis",ellos:"cocinan"}},
+                "coleccionar": {en:"to collect",conj:{yo:"colecciono",tu:"coleccionas",el:"colecciona",nosotros:"coleccionamos",vosotros:"coleccionáis",ellos:"coleccionan"}},
+                "comenzar": {en:"to start",conj:{yo:"comienzo",tu:"comienzas",el:"comienza",nosotros:"comenzamos",vosotros:"comenzáis",ellos:"comienzan"}},
+                "comer": {en:"to eat",conj:{yo:"como",tu:"comes",el:"come",nosotros:"comemos",vosotros:"coméis",ellos:"comen"}},
+                "compartir": {en:"to share",conj:{yo:"comparto",tu:"compartes",el:"comparte",nosotros:"compartimos",vosotros:"compartís",ellos:"comparten"}},
+                "completar": {en:"to complete",conj:{yo:"completo",tu:"completas",el:"completa",nosotros:"completamos",vosotros:"completáis",ellos:"completan"}},
+                "comprar": {en:"to buy",conj:{yo:"compro",tu:"compras",el:"compra",nosotros:"compramos",vosotros:"compráis",ellos:"compran"}},
+                "comprender": {en:"to understand",conj:{yo:"comprendo",tu:"comprendes",el:"comprende",nosotros:"comprendemos",vosotros:"comprendéis",ellos:"comprende"}},
+                "comunicar": {en:"to communicate",conj:{yo:"comunico",tu:"comunicas",el:"comunica",nosotros:"comunicamos",vosotros:"comunicáis",ellos:"comunican"}},
+                "conocer": {en:"to know (someone)",conj:{yo:"conozco",tu:"conoces",el:"conoce",nosotros:"conocemos",vosotros:"conocéis",ellos:"conocen"}},
+                "conseguir": {en:"to get/to obtain",conj:{yo:"consigo",tu:"consigues",el:"consigue",nosotros:"conseguimos",vosotros:"conseguís",ellos:"consiguen"}},
+                "contestar": {en:"to answer",conj:{yo:"contesto",tu:"contestas",el:"contesta",nosotros:"contestamos",vosotros:"contestáis",ellos:"contestan"}},
+                "continuar": {en:"to continue",conj:{yo:"continúo",tu:"continúas",el:"continúa",nosotros:"continuamos",vosotros:"continuáis",ellos:"continúan"}},
+                "conversar": {en:"to converse",conj:{yo:"converso",tu:"conversas",el:"conversa",nosotros:"conversamos",vosotros:"conversáis",ellos:"conversan"}},
+                "copiar": {en:"to copy",conj:{yo:"copio",tu:"copias",el:"copia",nosotros:"copiamos",vosotros:"copiáis",ellos:"copian"}},
+                "corregir": {en:"to correct",conj:{yo:"corrijo",tu:"corriges",el:"corrige",nosotros:"corregimos",vosotros:"corregís",ellos:"corrigen"}},
+                "correr": {en:"to run",conj:{yo:"corro",tu:"corres",el:"corre",nosotros:"corremos",vosotros:"corréis",ellos:"corren"}},
+                "dar": {en:"to give",conj:{yo:"doy",tu:"das",el:"da",nosotros:"damos",vosotros:"dais",ellos:"dan"}},
+                "decir": {en:"to say",conj:{yo:"digo",tu:"dices",el:"dice",nosotros:"decimos",vosotros:"decís",ellos:"dicen"}},
+                "decorar": {en:"to decorate",conj:{yo:"decoro",tu:"decoras",el:"decora",nosotros:"decoramos",vosotros:"decoráis",ellos:"decoran"}},
+                "dejar": {en:"to allow/to leave behind",conj:{yo:"dejo",tu:"dejas",el:"deja",nosotros:"dejamos",vosotros:"dejáis",ellos:"dejan"}},
+                "demostrar": {en:"to demonstrate",conj:{yo:"demuestro",tu:"demuestras",el:"demuestra",nosotros:"demostramos",vosotros:"demostráis",ellos:"demuestran"}},
+                "desayunar": {en:"to have breakfast",conj:{yo:"desayuno",tu:"desayunas",el:"desayuna",nosotros:"desayunamos",vosotros:"desayunáis",ellos:"desayunan"}},
+                "dormir": {en:"to sleep",conj:{yo:"duermo",tu:"duermes",el:"duerme",nosotros:"dormimos",vosotros:"dormís",ellos:"duermen"}},
+                "elegir": {en:"to choose",conj:{yo:"elijo",tu:"eliges",el:"elige",nosotros:"elegimos",vosotros:"elegís",ellos:"eligen"}},
+                "eliminar": {en:"to eliminate",conj:{yo:"elimino",tu:"eliminas",el:"elimina",nosotros:"eliminamos",vosotros:"elimináis",ellos:"eliminan"}},
+                "empezar": {en:"to start",conj:{yo:"empiezo",tu:"empiezas",el:"empieza",nosotros:"empezamos",vosotros:"empezáis",ellos:"empiezan"}},
+                "encontrar": {en:"to encounter (meet)",conj:{yo:"encuentro",tu:"encuentras",el:"encuentra",nosotros:"encontramos",vosotros:"encontráis",ellos:"encuentran"}},
+                "enseñar": {en:"to teach/to point out",conj:{yo:"enseño",tu:"enseñas",el:"enseña",nosotros:"enseñamos",vosotros:"enseñáis",ellos:"enseñan"}},
+                "entender": {en:"to understand",conj:{yo:"entiendo",tu:"entiendes",el:"entiende",nosotros:"entendemos",vosotros:"entendéis",ellos:"entienden"}},
+                "entrar": {en:"to enter",conj:{yo:"entro",tu:"entras",el:"entra",nosotros:"entramos",vosotros:"entráis",ellos:"entran"}},
+                "escoger": {en:"to choose",conj:{yo:"escojo",tu:"escoges",el:"escoge",nosotros:"escogemos",vosotros:"escogéis",ellos:"escogen"}},
+                "escribir": {en:"to write",conj:{yo:"escribo",tu:"escribes",el:"escribe",nosotros:"escribimos",vosotros:"escribís",ellos:"escriben"}},
+                "escuchar": {en:"to listen (to)",conj:{yo:"escucho",tu:"escuchas",el:"escucha",nosotros:"escuchamos",vosotros:"escucháis",ellos:"escuchan"}},
+                "esperar": {en:"to hope/to wait fo",conj:{yo:"espero",tu:"esperas",el:"espera",nosotros:"esperamos",vosotros:"esperáis",ellos:"esperan"}},
+                "esquiar": {en:"to ski",conj:{yo:"esquío",tu:"esquías",el:"esquía",nosotros:"esquiamos",vosotros:"esquiáis",ellos:"esquían"}},
+                "estar": {en:"to be (location)",conj:{yo:"estoy",tu:"estás",el:"está",nosotros:"estamos",vosotros:"estáis",ellos:"están"}},
+                "estudiar": {en:"to study",conj:{yo:"estudio",tu:"estudias",el:"estudia",nosotros:"estudiamos",vosotros:"estudiáis",ellos:"estudian"}},
+                "explicar": {en:"to explain",conj:{yo:"explico",tu:"explica",el:"explica",nosotros:"explicamos",vosotros:"explicáis",ellos:"explic an"}},
+                "ganar": {en:"to earn/to win",conj:{yo:"gano",tu:"ganas",el:"gana",nosotros:"ganamos",vosotros:"ganáis",ellos:"ganan"}},
+                "guardar": {en:"to put away",conj:{yo:"guardo",tu:"guardas",el:"guarda",nosotros:"guardamos",vosotros:"guardáis",ellos:"guardan"}},
+                "hablar": {en:"to talk",conj:{yo:"hablo",tu:"hablas",el:"habla",nosotros:"hablamos",vosotros:"habláis",ellos:"hablan"}},
+                "hacer": {en:"to do/to make",conj:{yo:"hago",tu:"haces",el:"hace",nosotros:"hacemos",vosotros:"hacéis",ellos:"hacen"}},
+                "iniciar": {en:"to begin",conj:{yo:"inicio",tu:"inicias",el:"inicia",nosotros:"iniciamos",vosotros:"iniciáis",ellos:"inician"}},
+                "invitar": {en:"to invite",conj:{yo:"invito",tu:"invitas",el:"invita",nosotros:"invitamos",vosotros:"invitáis",ellos:"invitan"}},
+                "ir": {en:"to go",conj:{yo:"voy",tu:"vas",el:"va",nosotros:"vamos",vosotros:"vais",ellos:"van"}},
+                "jugar": {en:"to play",conj:{yo:"juego",tu:"juegas",el:"juega",nosotros:"jugamos",vosotros:"jugáis",ellos:"juegan"}},
+                "leer": {en:"to read",conj:{yo:"leo",tu:"lees",el:"lee",nosotros:"leemos",vosotros:"leéis",ellos:"leen"}},
+                "levantar": {en:"to raise",conj:{yo:"levanto",tu:"levantas",el:"levanta",nosotros:"levantamos",vosotros:"levantáis",ellos:"levantan"}},
+                "llegar": {en:"to arrive",conj:{yo:"llego",tu:"llegas",el:"llega",nosotros:"llegamos",vosotros:"llegáis",ellos:"llegan"}},
+                "llevar": {en:"to wear/to bring",conj:{yo:"llevo",tu:"llevas",el:"lleva",nosotros:"llevamos",vosotros:"lleváis",ellos:"llevan"}},
+                "lograr": {en:"to acheive",conj:{yo:"logro",tu:"logras",el:"logra",nosotros:"logramos",vosotros:"lográis",ellos:"logran"}},
+                "mirar": {en:"to look",conj:{yo:"miro",tu:"miras",el:"mira",nosotros:"miramos",vosotros:"miráis",ellos:"miran"}},
+                "montar": {en:"to get on",conj:{yo:"monta",tu:"montas",el:"monta",nosotros:"montamos",vosotros:"montáis",ellos:"montan"}},
+                "nadar": {en:"to swim",conj:{yo:"nado",tu:"nadas",el:"nada",nosotros:"nadamos",vosotros:"nadáis",ellos:"nadan"}},
+                "necesitar": {en:"to need",conj:{yo:"necesito",tu:"necesitas",el:"necesita",nosotros:"necesitamos",vosotros:"necesitáis",ellos:"necesitan"}},
+                "observar": {en:"to observe",conj:{yo:"observo",tu:"observas",el:"observa",nosotros:"observamos",vosotros:"observáis",ellos:"observan"}},
+                "odiar": {en:"to hate, despise",conj:{yo:"odio",tu:"odias",el:"odia",nosotros:"odiamos",vosotros:"odiáis",ellos:"odian"}},
+                "oír": {en:"to hear",conj:{yo:"oigo",tu:"oyes",el:"oye",nosotros:"oímos",vosotros:"oís",ellos:"oyen"}},
+                "ordenar": {en:"to order/to arrange",conj:{yo:"ordeno",tu:"ordenas",el:"ordena",nosotros:"ordenamos",vosotros:"ordenáis",ellos:"ordenan"}},
+                "pagar": {en:"to pay",conj:{yo:"pago",tu:"pagas",el:"paga",nosotros:"pagamos",vosotros:"pagáis",ellos:"pagan"}},
+                "participar": {en:"to participate",conj:{yo:"participo",tu:"participas",el:"participa",nosotros:"participamos",vosotros:"participáis",ellos:"participan"}},
+                "pasear": {en:"to take a walk",conj:{yo:"paseo",tu:"paseas",el:"pasea",nosotros:"paseamos",vosotros:"paseáis",ellos:"pasean"}},
+                "pensar": {en:"to think",conj:{yo:"pienso",tu:"piensas",el:"piensa",nosotros:"pensamos",vosotros:"pensáis",ellos:"piensan"}},
+                "perder": {en:"to lose",conj:{yo:"pierdo",tu:"pierdes",el:"pierde",nosotros:"perdemos",vosotros:"perdéis",ellos:"pierden"}},
+                "platicar": {en:"to discuss",conj:{yo:"platico",tu:"platicas",el:"platica",nosotros:"platicamos",vosotros:"platicáis",ellos:"platican"}},
+                "poder": {en:"to be able to",conj:{yo:"puedo",tu:"puedes",el:"puede",nosotros:"podemos",vosotros:"podéis",ellos:"pueden"}},
+                "poner": {en:"to put",conj:{yo:"pongo",tu:"pones",el:"pone",nosotros:"ponemos",vosotros:"ponéis",ellos:"ponen"}},
+                "practicar": {en:"to practice",conj:{yo:"practico",tu:"practicas",el:"practica",nosotros:"practicamos",vosotros:"practicáis",ellos:"practican"}},
+                "preferir": {en:"to prefer",conj:{yo:"prefiero",tu:"prefieres",el:"prefiere",nosotros:"preferimos",vosotros:"preferís",ellos:"prefieren"}},
+                "preguntar": {en:"to ask",conj:{yo:"pregunto",tu:"preguntas",el:"pregunta",nosotros:"preguntamos",vosotros:"preguntáis",ellos:"preguntan"}},
+                "prestar": {en:"to lend",conj:{yo:"presto",tu:"prestas",el:"presta",nosotros:"prestamos",vosotros:"prestáis",ellos:"prestan"}},
+                "querer": {en:"to want/to love",conj:{yo:"quiero",tu:"quieres",el:"quiere",nosotros:"queremos",vosotros:"queréis",ellos:"quieren"}},
+                "recordar": {en:"to remember/to remind",conj:{yo:"recuerdo",tu:"recuerdas",el:"recuerda",nosotros:"recordamos",vosotros:"recordáis",ellos:"recuerdan"}},
+                "regresar": {en:"to return",conj:{yo:"regreso",tu:"regresas",el:"regresa",nosotros:"regresamos",vosotros:"regresáis",ellos:"regresan"}},
+                "repetir": {en:"to repeat",conj:{yo:"repito",tu:"repites",el:"repite",nosotros:"repetimos",vosotros:"repetís",ellos:"repiten"}},
+                "saber": {en:"to know (how to)",conj:{yo:"sé",tu:"sabes",el:"sabe",nosotros:"sabemos",vosotros:"sabéis",ellos:"saben"}},
+                "sacar": {en:"to take out",conj:{yo:"saco",tu:"sacas",el:"saca",nosotros:"sacamos",vosotros:"sacáis",ellos:"sacan"}},
+                "salir": {en:"to depart",conj:{yo:"salgo",tu:"sales",el:"sale",nosotros:"salimos",vosotros:"salís",ellos:"salen"}},
+                "ser": {en:"to be (permanent)",conj:{yo:"soy",tu:"eres",el:"es",nosotros:"somos",vosotros:"sois",ellos:"son"}},
+                "tener": {en:"to have",conj:{yo:"tengo",tu:"tienes",el:"tiene",nosotros:"tenemos",vosotros:"tenéis",ellos:"tienen"}},
+                "terminar": {en:"to end",conj:{yo:"termino",tu:"terminas",el:"termina",nosotros:"terminamos",vosotros:"termináis",ellos:"terminan"}},
+                "tocar": {en:"to touch/to play an instrument",conj:{yo:"toco",tu:"tocas",el:"toca",nosotros:"tocamos",vosotros:"tocáis",ellos:"tocan"}},
+                "tomar": {en:"to take/to drink",conj:{yo:"tomo",tu:"tomas",el:"toma",nosotros:"tomamos",vosotros:"tomáis",ellos:"toman"}},
+                "trabajar": {en:"to work",conj:{yo:"trabajo",tu:"trabajas",el:"trabaja",nosotros:"trabajamos",vosotros:"trabajáis",ellos:"trabajan"}},
+                "traer": {en:"to bring",conj:{yo:"traigo",tu:"traes",el:"trae",nosotros:"traemos",vosotros:"traéis",ellos:"traen"}},
+                "venir": {en:"to come",conj:{yo:"vengo",tu:"vienes",el:"viene",nosotros:"venimos",vosotros:"venís",ellos:"vienen"}},
+                "ver": {en:"to see",conj:{yo:"veo",tu:"ves",el:"ve",nosotros:"vemos",vosotros:"veis",ellos:"ven"}},
+                "viajar": {en:"to travel",conj:{yo:"viajo",tu:"viajas",el:"viaja",nosotros:"viajamos",vosotros:"viajáis",ellos:"viajan"}},
+                "visitar": {en:"to visit",conj:{yo:"visito",tu:"visitas",el:"visita",nosotros:"visitamos",vosotros:"visitáis",ellos:"visitan"}},
+                "vivir": {en:"to live",conj:{yo:"vivo",tu:"vives",el:"vive",nosotros:"vivimos",vosotros:"vivís",ellos:"viven"}},
+                "volar": {en:"to fly",conj:{yo:"vuelo",tu:"vuelas",el:"vuela",nosotros:"volamos",vosotros:"voláis",ellos:"vuelan"}},
+                "volver": {en:"to go back/to do again",conj:{yo:"vuelvo",tu:"vuelves",el:"vuelve",nosotros:"volvemos",vosotros:"volvéis",ellos:"vuelven"}}
+            };
+
+            const PRONOUNS = [
+                {key: 'yo', display: 'Yo (I)'},
+                {key: 'tu', display: 'Tú (You, inf.)'},
+                {key: 'el', display: 'Él/Ella/Ud. (He/She/You, f.)'},
+                {key: 'nosotros', display: 'Nosotros(as) (We)'},
+                {key: 'vosotros', display: 'Vosotros(as) (You, pl. inf.)'},
+                {key: 'ellos', display: 'Ellos(as)/Uds. (They/You, pl. f.)'}
+            ];
+
+            const inputEl = document.getElementById('rict-input');
+            const outputEl = document.getElementById('rict-output');
+            const headerEl = document.getElementById('rict-header');
+            const hudEl = document.getElementById('rict-hud');
+
+            // Function to copy text to clipboard
+            function copyToClipboard(text, button) {
+                const el = document.createElement('textarea');
+                el.value = text;
+                document.body.appendChild(el);
+                el.select();
+                try {
+                    // Older method for clipboard copy, as modern methods often fail in iframes
+                    document.execCommand('copy');
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '✅ Copied!';
+                    setTimeout(() => button.innerHTML = originalText, 500);
+                } catch (err) {
+                    console.error('Failed to copy text:', err);
+                    button.innerHTML = '❌ Fail';
+                }
+                document.body.removeChild(el);
+            };
+            // Expose to global scope for onclick attributes in dynamically generated HTML
+            window.copyToClipboard = copyToClipboard;
+            
+            // New function: Sets the input field and triggers a new search
+            function setInputAndConjugate(verb) {
+                inputEl.value = verb;
+                updateOutput(); // This will now find an exact match and display the table
+                inputEl.focus();
+            }
+            window.setInputAndConjugate = setInputAndConjugate; // Expose globally
+
+            // Function to update the displayed conjugations or suggestions
+            function updateOutput() {
+                const query = inputEl.value.toLowerCase().trim();
+                outputEl.innerHTML = '';
+
+                // 1. Initial Empty State
+                if (query === '') {
+                    outputEl.innerHTML = '<div class="text-gray-400 text-center py-4">Enter a Spanish infinitive verb to see its Present Tense conjugations.</div>';
+                    return;
+                }
+
+                const verbData = VERB_DATA[query];
+
+                // 2. Exact Match Found (Display Full Conjugation)
+                if (verbData) {
+                    let html = `
+                        <div class="px-1 pb-2">
+                            <span class="text-lg font-extrabold text-red-400">${query}</span>
+                            <span class="text-gray-400">| ${verbData.en}</span>
+                            <span class="text-xs text-gray-500 block mt-1">Present Tense</span>
+                        </div>
+                        <table class="conjugation-table w-full text-left">
+                    `;
+
+                    PRONOUNS.forEach(p => {
+                        const conjugation = verbData.conj[p.key];
+                        html += `
+                            <tr>
+                                <td class="w-2/5 text-gray-300">${p.display}</td>
+                                <td class="w-3/5 text-right font-bold text-yellow-300">
+                                    ${conjugation}
+                                    <button class="copy-btn" onclick="copyToClipboard('${conjugation.replace(/'/g, "\\'")}', this)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 inline-block align-text-top">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v2.25c0 .414-.336.75-.75.75H2.25a.75.75 0 0 1-.75-.75V8.5a.75.75 0 0 1 .75-.75h2.25m4.5 0H21.5c.414 0 .75.336.75.75v11.5a.75.75 0 0 1-.75.75H8.25a.75.75 0 0 1-.75-.75V8.5a.75.75 0 0 1 .75-.75Z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 12.5h-5.25v-5.25h5.25v5.25Z" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    html += `</table>`;
+                    outputEl.innerHTML = html;
+                    return; // Stop here if exact match found
+                }
+
+                // 3. Partial Match Search (Suggestions)
+                const matchedVerbs = Object.keys(VERB_DATA).filter(verb => 
+                    verb.startsWith(query) || verb.includes(query)
+                ).sort(); // Sort alphabetically for consistency
+
+                if (matchedVerbs.length > 0) {
+                    // Limit the number of suggestions to keep the window size reasonable
+                    const displayLimit = 20; 
+                    const verbsToDisplay = matchedVerbs.slice(0, displayLimit);
+                    
+                    let html = '<div class="text-gray-400 mb-2 font-semibold">Did you mean...? (Click to conjugate)</div><div class="grid grid-cols-2 gap-2">';
+                    
+                    verbsToDisplay.forEach(verb => {
+                        const englishMeaning = VERB_DATA[verb].en;
+                        // Use the setInputAndConjugate function exposed globally
+                        html += `<button onclick="setInputAndConjugate('${verb}')" 
+                                        class="p-2 text-left bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                                    <span class="font-bold text-yellow-300">${verb}</span> 
+                                    <span class="text-xs text-gray-400 block truncate">(${englishMeaning})</span>
+                                </button>`;
+                    });
+                    
+                    html += '</div>';
+
+                    if (matchedVerbs.length > displayLimit) {
+                        html += `<div class="text-gray-500 text-center mt-3 text-xs">...and ${matchedVerbs.length - displayLimit} more matches. Keep typing to narrow results.</div>`;
+                    }
+
+                    outputEl.innerHTML = html;
+                    return;
+                }
+
+                // 4. No Match Found
+                outputEl.innerHTML = '<div class="text-red-400 text-center py-4 font-semibold">No verbs found matching that search.</div>';
+            }
+
+            // --- Dragging Logic (for movement when opened outside an iframe) ---
+            // These variables are now safely scoped within the IIFE.
+            let isDragging = false;
+            let x = 0, y = 0, dx = 0, dy = 0; 
+
+            headerEl.onmousedown = (e) => {
+                isDragging = true;
+                x = e.clientX;
+                y = e.clientY;
+                dx = hudEl.offsetLeft - x;
+                dy = hudEl.offsetTop - y;
+                headerEl.style.cursor = 'grabbing';
+                e.preventDefault();
+            };
+
+            document.onmouseup = () => {
+                if (isDragging) {
+                    isDragging = false;
+                    headerEl.style.cursor = 'grab';
+                }
+            };
+
+            document.onmousemove = (e) => {
+                if (!isDragging) return;
+                // Only adjust if the application is not full screen (i.e., not in this environment)
+                if (hudEl.style.position === 'fixed') {
+                    hudEl.style.left = (e.clientX + dx) + 'px';
+                    hudEl.style.top = (e.clientY + dy) + 'px';
+                }
+            };
+
+            // Event listener for input
+            inputEl.oninput = updateOutput;
+
+            // Hide and show logic when embedded in an iframe
+            window.addEventListener('message', (event) => {
+                if (event.data && event.data.action === 'show') {
+                    document.body.style.display = 'flex';
+                    inputEl.focus();
+                } else if (event.data && event.data.action === 'hide') {
+                    document.body.style.display = 'none';
+                }
+            });
+            
+            // Initial setup for the search box
+            window.onload = () => {
+                inputEl.focus();
+            };
+        })(); // End of IIFE
+    </script>
+</body>
+</html>
