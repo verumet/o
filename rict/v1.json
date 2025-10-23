@@ -1,79 +1,222 @@
 {
-  "ser": {
-    "en": "to be (permanent)",
+  "abrir": {
+    "en": "to open",
     "conj": {
-      "yo": "soy",
-      "tu": "eres",
-      "el": "es",
-      "nosotros": "somos",
-      "vosotros": "sois",
-      "ellos": "son"
+      "yo": "abro",
+      "tu": "abres",
+      "el": "abre",
+      "nosotros": "abrimos",
+      "vosotros": "abrís",
+      "ellos": "abren"
     }
   },
-  "estar": {
-    "en": "to be (location/condition)",
+  "acabar": {
+    "en": "to finish",
     "conj": {
-      "yo": "estoy",
-      "tu": "estás",
-      "el": "está",
-      "nosotros": "estamos",
-      "vosotros": "estáis",
-      "ellos": "están"
+      "yo": "acabo",
+      "tu": "acabas",
+      "el": "acaba",
+      "nosotros": "acabamos",
+      "vosotros": "acabáis",
+      "ellos": "acaban"
     }
   },
-  "tener": {
-    "en": "to have",
+  "amar": {
+    "en": "to love",
     "conj": {
-      "yo": "tengo",
-      "tu": "tienes",
-      "el": "tiene",
-      "nosotros": "tenemos",
-      "vosotros": "tenéis",
-      "ellos": "tienen"
+      "yo": "amo",
+      "tu": "amas",
+      "el": "ama",
+      "nosotros": "amamos",
+      "vosotros": "amáis",
+      "ellos": "aman"
     }
   },
-  "hacer": {
-    "en": "to do/to make",
+  "apagar": {
+    "en": "to turn off",
     "conj": {
-      "yo": "hago",
-      "tu": "haces",
-      "el": "hace",
-      "nosotros": "hacemos",
-      "vosotros": "hacéis",
-      "ellos": "hacen"
+      "yo": "apago",
+      "tu": "apagas",
+      "el": "apaga",
+      "nosotros": "apagamos",
+      "vosotros": "apagáis",
+      "ellos": "apagan"
     }
   },
-  "ir": {
-    "en": "to go",
+  "apoyar": {
+    "en": "to support",
     "conj": {
-      "yo": "voy",
-      "tu": "vas",
-      "el": "va",
-      "nosotros": "vamos",
-      "vosotros": "vais",
-      "ellos": "van"
+      "yo": "apoyo",
+      "tu": "apoyas",
+      "el": "apoya",
+      "nosotros": "apoyamos",
+      "vosotros": "apoyáis",
+      "ellos": "apoyan"
     }
   },
-  "poder": {
-    "en": "to be able to (can)",
+  "aprender": {
+    "en": "to learn",
     "conj": {
-      "yo": "puedo",
-      "tu": "puedes",
-      "el": "puede",
-      "nosotros": "podemos",
-      "vosotros": "podéis",
-      "ellos": "pueden"
+      "yo": "aprendo",
+      "tu": "aprendes",
+      "el": "aprende",
+      "nosotros": "aprendemos",
+      "vosotros": "aprendéis",
+      "ellos": "aprenden"
     }
   },
-  "hablar": {
-    "en": "to talk",
+  "ayudar": {
+    "en": "to help",
     "conj": {
-      "yo": "hablo",
-      "tu": "hablas",
-      "el": "habla",
-      "nosotros": "hablamos",
-      "vosotros": "habláis",
-      "ellos": "hablan"
+      "yo": "ayudo",
+      "tu": "ayudas",
+      "el": "ayuda",
+      "nosotros": "ayudamos",
+      "vosotros": "ayudáis",
+      "ellos": "ayudan"
+    }
+  },
+  "beber": {
+    "en": "to drink",
+    "conj": {
+      "yo": "bebo",
+      "tu": "bebes",
+      "el": "bebe",
+      "nosotros": "bebemos",
+      "vosotros": "bebéis",
+      "ellos": "beben"
+    }
+  },
+  "borrar": {
+    "en": "to erase",
+    "conj": {
+      "yo": "borro",
+      "tu": "borras",
+      "el": "borra",
+      "nosotros": "borramos",
+      "vosotros": "borráis",
+      "ellos": "borran"
+    }
+  },
+  "buscar": {
+    "en": "to look for",
+    "conj": {
+      "yo": "busco",
+      "tu": "buscas",
+      "el": "busca",
+      "nosotros": "buscamos",
+      "vosotros": "buscáis",
+      "ellos": "buscan"
+    }
+  },
+  "caer": {
+    "en": "to fall",
+    "conj": {
+      "yo": "caigo",
+      "tu": "caes",
+      "el": "cae",
+      "nosotros": "caemos",
+      "vosotros": "caéis",
+      "ellos": "caen"
+    }
+  },
+  "callarse": {
+    "en": "to be silent",
+    "conj": {
+      "yo": "me callo",
+      "tu": "te callas",
+      "el": "se calla",
+      "nosotros": "nos callamos",
+      "vosotros": "os calláis",
+      "ellos": "se callan"
+    }
+  },
+  "cambiar": {
+    "en": "to change",
+    "conj": {
+      "yo": "cambio",
+      "tu": "cambias",
+      "el": "cambia",
+      "nosotros": "cambiamos",
+      "vosotros": "cambiáis",
+      "ellos": "cambian"
+    }
+  },
+  "caminar": {
+    "en": "to walk",
+    "conj": {
+      "yo": "camino",
+      "tu": "caminas",
+      "el": "camina",
+      "nosotros": "caminamos",
+      "vosotros": "camináis",
+      "ellos": "caminan"
+    }
+  },
+  "cantar": {
+    "en": "to sing",
+    "conj": {
+      "yo": "canto",
+      "tu": "cantas",
+      "el": "canta",
+      "nosotros": "cantamos",
+      "vosotros": "cantáis",
+      "ellos": "cantan"
+    }
+  },
+  "celebrar": {
+    "en": "to celebrate",
+    "conj": {
+      "yo": "celebro",
+      "tu": "celebras",
+      "el": "celebra",
+      "nosotros": "celebramos",
+      "vosotros": "celebráis",
+      "ellos": "celebran"
+    }
+  },
+  "cerrar": {
+    "en": "to close",
+    "conj": {
+      "yo": "cierro",
+      "tu": "cierras",
+      "el": "cierra",
+      "nosotros": "cerramos",
+      "vosotros": "cerráis",
+      "ellos": "cierran"
+    }
+  },
+  "cocinar": {
+    "en": "to cook",
+    "conj": {
+      "yo": "cocino",
+      "tu": "cocinas",
+      "el": "cocina",
+      "nosotros": "cocinamos",
+      "vosotros": "cocináis",
+      "ellos": "cocinan"
+    }
+  },
+  "coleccionar": {
+    "en": "to collect",
+    "conj": {
+      "yo": "colecciono",
+      "tu": "coleccionas",
+      "el": "colecciona",
+      "nosotros": "coleccionamos",
+      "vosotros": "coleccionáis",
+      "ellos": "coleccionan"
+    }
+  },
+  "comenzar": {
+    "en": "to start",
+    "conj": {
+      "yo": "comienzo",
+      "tu": "comienzas",
+      "el": "comienza",
+      "nosotros": "comenzamos",
+      "vosotros": "comenzáis",
+      "ellos": "comienzan"
     }
   },
   "comer": {
@@ -87,15 +230,752 @@
       "ellos": "comen"
     }
   },
-  "vivir": {
-    "en": "to live",
+  "compartir": {
+    "en": "to share",
     "conj": {
-      "yo": "vivo",
-      "tu": "vives",
-      "el": "vive",
-      "nosotros": "vivimos",
-      "vosotros": "vivís",
-      "ellos": "viven"
+      "yo": "comparto",
+      "tu": "compartes",
+      "el": "comparte",
+      "nosotros": "compartimos",
+      "vosotros": "compartís",
+      "ellos": "comparten"
+    }
+  },
+  "completar": {
+    "en": "to complete",
+    "conj": {
+      "yo": "completo",
+      "tu": "completas",
+      "el": "completa",
+      "nosotros": "completamos",
+      "vosotros": "completáis",
+      "ellos": "completan"
+    }
+  },
+  "comprar": {
+    "en": "to buy",
+    "conj": {
+      "yo": "compro",
+      "tu": "compras",
+      "el": "compra",
+      "nosotros": "compramos",
+      "vosotros": "compráis",
+      "ellos": "compran"
+    }
+  },
+  "comprender": {
+    "en": "to understand",
+    "conj": {
+      "yo": "comprendo",
+      "tu": "comprendes",
+      "el": "comprende",
+      "nosotros": "comprendemos",
+      "vosotros": "comprendéis",
+      "ellos": "comprenden"
+    }
+  },
+  "comunicar": {
+    "en": "to communicate",
+    "conj": {
+      "yo": "comunico",
+      "tu": "comunicas",
+      "el": "comunica",
+      "nosotros": "comunicamos",
+      "vosotros": "comunicáis",
+      "ellos": "comunican"
+    }
+  },
+  "conocer": {
+    "en": "to know (someone)",
+    "conj": {
+      "yo": "conozco",
+      "tu": "conoces",
+      "el": "conoce",
+      "nosotros": "conocemos",
+      "vosotros": "conocéis",
+      "ellos": "conocen"
+    }
+  },
+  "conseguir": {
+    "en": "to get/to obtain",
+    "conj": {
+      "yo": "consigo",
+      "tu": "consigues",
+      "el": "consigue",
+      "nosotros": "conseguimos",
+      "vosotros": "conseguís",
+      "ellos": "consiguen"
+    }
+  },
+  "contestar": {
+    "en": "to answer",
+    "conj": {
+      "yo": "contesto",
+      "tu": "contestas",
+      "el": "contesta",
+      "nosotros": "contestamos",
+      "vosotros": "contestáis",
+      "ellos": "contestan"
+    }
+  },
+  "continuar": {
+    "en": "to continue",
+    "conj": {
+      "yo": "continúo",
+      "tu": "continúas",
+      "el": "continúa",
+      "nosotros": "continuamos",
+      "vosotros": "continuáis",
+      "ellos": "continúan"
+    }
+  },
+  "conversar": {
+    "en": "to converse",
+    "conj": {
+      "yo": "converso",
+      "tu": "conversas",
+      "el": "conversa",
+      "nosotros": "conversamos",
+      "vosotros": "conversáis",
+      "ellos": "conversan"
+    }
+  },
+  "copiar": {
+    "en": "to copy",
+    "conj": {
+      "yo": "copio",
+      "tu": "copias",
+      "el": "copia",
+      "nosotros": "copiamos",
+      "vosotros": "copiáis",
+      "ellos": "copian"
+    }
+  },
+  "corregir": {
+    "en": "to correct",
+    "conj": {
+      "yo": "corrijo",
+      "tu": "corriges",
+      "el": "corrige",
+      "nosotros": "corregimos",
+      "vosotros": "corregís",
+      "ellos": "corrigen"
+    }
+  },
+  "correr": {
+    "en": "to run",
+    "conj": {
+      "yo": "corro",
+      "tu": "corres",
+      "el": "corre",
+      "nosotros": "corremos",
+      "vosotros": "corréis",
+      "ellos": "corren"
+    }
+  },
+  "dar": {
+    "en": "to give",
+    "conj": {
+      "yo": "doy",
+      "tu": "das",
+      "el": "da",
+      "nosotros": "damos",
+      "vosotros": "dais",
+      "ellos": "dan"
+    }
+  },
+  "decir": {
+    "en": "to say",
+    "conj": {
+      "yo": "digo",
+      "tu": "dices",
+      "el": "dice",
+      "nosotros": "decimos",
+      "vosotros": "decís",
+      "ellos": "dicen"
+    }
+  },
+  "decorar": {
+    "en": "to decorate",
+    "conj": {
+      "yo": "decoro",
+      "tu": "decoras",
+      "el": "decora",
+      "nosotros": "decoramos",
+      "vosotros": "decoráis",
+      "ellos": "decoran"
+    }
+  },
+  "dejar": {
+    "en": "to allow/to leave behind",
+    "conj": {
+      "yo": "dejo",
+      "tu": "dejas",
+      "el": "deja",
+      "nosotros": "dejamos",
+      "vosotros": "dejáis",
+      "ellos": "dejan"
+    }
+  },
+  "demostrar": {
+    "en": "to demonstrate",
+    "conj": {
+      "yo": "demuestro",
+      "tu": "demuestras",
+      "el": "demuestra",
+      "nosotros": "demostramos",
+      "vosotros": "demostráis",
+      "ellos": "demuestran"
+    }
+  },
+  "desayunar": {
+    "en": "to have breakfast",
+    "conj": {
+      "yo": "desayuno",
+      "tu": "desayunas",
+      "el": "desayuna",
+      "nosotros": "desayunamos",
+      "vosotros": "desayunáis",
+      "ellos": "desayunan"
+    }
+  },
+  "dormir": {
+    "en": "to sleep",
+    "conj": {
+      "yo": "duermo",
+      "tu": "duermes",
+      "el": "duerme",
+      "nosotros": "dormimos",
+      "vosotros": "dormís",
+      "ellos": "duermen"
+    }
+  },
+  "elegir": {
+    "en": "to choose",
+    "conj": {
+      "yo": "elijo",
+      "tu": "eliges",
+      "el": "elige",
+      "nosotros": "elegimos",
+      "vosotros": "elegís",
+      "ellos": "eligen"
+    }
+  },
+  "eliminar": {
+    "en": "to eliminate",
+    "conj": {
+      "yo": "elimino",
+      "tu": "eliminas",
+      "el": "elimina",
+      "nosotros": "eliminamos",
+      "vosotros": "elimináis",
+      "ellos": "eliminan"
+    }
+  },
+  "empezar": {
+    "en": "to start",
+    "conj": {
+      "yo": "empiezo",
+      "tu": "empiezas",
+      "el": "empieza",
+      "nosotros": "empezamos",
+      "vosotros": "empezáis",
+      "ellos": "empiezan"
+    }
+  },
+  "encontrar": {
+    "en": "to encounter (meet)",
+    "conj": {
+      "yo": "encuentro",
+      "tu": "encuentras",
+      "el": "encuentra",
+      "nosotros": "encontramos",
+      "vosotros": "encontráis",
+      "ellos": "encuentran"
+    }
+  },
+  "enseñar": {
+    "en": "to teach/to point out",
+    "conj": {
+      "yo": "enseño",
+      "tu": "enseñas",
+      "el": "enseña",
+      "nosotros": "enseñamos",
+      "vosotros": "enseñáis",
+      "ellos": "enseñan"
+    }
+  },
+  "entender": {
+    "en": "to understand",
+    "conj": {
+      "yo": "entiendo",
+      "tu": "entiendes",
+      "el": "entiende",
+      "nosotros": "entendemos",
+      "vosotros": "entendéis",
+      "ellos": "entienden"
+    }
+  },
+  "entrar": {
+    "en": "to enter",
+    "conj": {
+      "yo": "entro",
+      "tu": "entras",
+      "el": "entra",
+      "nosotros": "entramos",
+      "vosotros": "entráis",
+      "ellos": "entran"
+    }
+  },
+  "escoger": {
+    "en": "to choose",
+    "conj": {
+      "yo": "escojo",
+      "tu": "escoges",
+      "el": "escoge",
+      "nosotros": "escogemos",
+      "vosotros": "escogéis",
+      "ellos": "escogen"
+    }
+  },
+  "escribir": {
+    "en": "to write",
+    "conj": {
+      "yo": "escribo",
+      "tu": "escribes",
+      "el": "escribe",
+      "nosotros": "escribimos",
+      "vosotros": "escribís",
+      "ellos": "escriben"
+    }
+  },
+  "escuchar": {
+    "en": "to listen (to)",
+    "conj": {
+      "yo": "escucho",
+      "tu": "escuchas",
+      "el": "escucha",
+      "nosotros": "escuchamos",
+      "vosotros": "escucháis",
+      "ellos": "escuchan"
+    }
+  },
+  "esperar": {
+    "en": "to hope/to wait fo",
+    "conj": {
+      "yo": "espero",
+      "tu": "esperas",
+      "el": "espera",
+      "nosotros": "esperamos",
+      "vosotros": "esperáis",
+      "ellos": "esperan"
+    }
+  },
+  "esquiar": {
+    "en": "to ski",
+    "conj": {
+      "yo": "esquío",
+      "tu": "esquías",
+      "el": "esquía",
+      "nosotros": "esquiamos",
+      "vosotros": "esquiáis",
+      "ellos": "esquían"
+    }
+  },
+  "estar": {
+    "en": "to be (location/condition)",
+    "conj": {
+      "yo": "estoy",
+      "tu": "estás",
+      "el": "está",
+      "nosotros": "estamos",
+      "vosotros": "estáis",
+      "ellos": "están"
+    }
+  },
+  "estudiar": {
+    "en": "to study",
+    "conj": {
+      "yo": "estudio",
+      "tu": "estudias",
+      "el": "estudia",
+      "nosotros": "estudiamos",
+      "vosotros": "estudiáis",
+      "ellos": "estudian"
+    }
+  },
+  "explicar": {
+    "en": "to explain",
+    "conj": {
+      "yo": "explico",
+      "tu": "explicas",
+      "el": "explica",
+      "nosotros": "explicamos",
+      "vosotros": "explicáis",
+      "ellos": "explican"
+    }
+  },
+  "ganar": {
+    "en": "to earn/to win",
+    "conj": {
+      "yo": "gano",
+      "tu": "ganas",
+      "el": "gana",
+      "nosotros": "ganamos",
+      "vosotros": "ganáis",
+      "ellos": "ganan"
+    }
+  },
+  "guardar": {
+    "en": "to put away",
+    "conj": {
+      "yo": "guardo",
+      "tu": "guardas",
+      "el": "guarda",
+      "nosotros": "guardamos",
+      "vosotros": "guardáis",
+      "ellos": "guardan"
+    }
+  },
+  "hablar": {
+    "en": "to talk",
+    "conj": {
+      "yo": "hablo",
+      "tu": "hablas",
+      "el": "habla",
+      "nosotros": "hablamos",
+      "vosotros": "habláis",
+      "ellos": "hablan"
+    }
+  },
+  "hacer": {
+    "en": "to do/to make",
+    "conj": {
+      "yo": "hago",
+      "tu": "haces",
+      "el": "hace",
+      "nosotros": "hacemos",
+      "vosotros": "hacéis",
+      "ellos": "hacen"
+    }
+  },
+  "iniciar": {
+    "en": "to begin",
+    "conj": {
+      "yo": "inicio",
+      "tu": "inicias",
+      "el": "inicia",
+      "nosotros": "iniciamos",
+      "vosotros": "iniciáis",
+      "ellos": "inician"
+    }
+  },
+  "invitar": {
+    "en": "to invite",
+    "conj": {
+      "yo": "invito",
+      "tu": "invitas",
+      "el": "invita",
+      "nosotros": "invitamos",
+      "vosotros": "invitáis",
+      "ellos": "invitan"
+    }
+  },
+  "ir": {
+    "en": "to go",
+    "conj": {
+      "yo": "voy",
+      "tu": "vas",
+      "el": "va",
+      "nosotros": "vamos",
+      "vosotros": "vais",
+      "ellos": "van"
+    }
+  },
+  "jugar": {
+    "en": "to play",
+    "conj": {
+      "yo": "juego",
+      "tu": "juegas",
+      "el": "juega",
+      "nosotros": "jugamos",
+      "vosotros": "jugáis",
+      "ellos": "juegan"
+    }
+  },
+  "leer": {
+    "en": "to read",
+    "conj": {
+      "yo": "leo",
+      "tu": "lees",
+      "el": "lee",
+      "nosotros": "leemos",
+      "vosotros": "leéis",
+      "ellos": "leen"
+    }
+  },
+  "levantar": {
+    "en": "to raise",
+    "conj": {
+      "yo": "levanto",
+      "tu": "levantas",
+      "el": "levanta",
+      "nosotros": "levantamos",
+      "vosotros": "levantáis",
+      "ellos": "levantan"
+    }
+  },
+  "llegar": {
+    "en": "to arrive",
+    "conj": {
+      "yo": "llego",
+      "tu": "llegas",
+      "el": "llega",
+      "nosotros": "llegamos",
+      "vosotros": "llegáis",
+      "ellos": "llegan"
+    }
+  },
+  "llevar": {
+    "en": "to wear/to bring",
+    "conj": {
+      "yo": "llevo",
+      "tu": "llevas",
+      "el": "lleva",
+      "nosotros": "llevamos",
+      "vosotros": "lleváis",
+      "ellos": "llevan"
+    }
+  },
+  "lograr": {
+    "en": "to acheive",
+    "conj": {
+      "yo": "logro",
+      "tu": "logras",
+      "el": "logra",
+      "nosotros": "logramos",
+      "vosotros": "lográis",
+      "ellos": "logran"
+    }
+  },
+  "mirar": {
+    "en": "to look",
+    "conj": {
+      "yo": "miro",
+      "tu": "miras",
+      "el": "mira",
+      "nosotros": "miramos",
+      "vosotros": "miráis",
+      "ellos": "miran"
+    }
+  },
+  "montar": {
+    "en": "to get on",
+    "conj": {
+      "yo": "monto",
+      "tu": "montas",
+      "el": "monta",
+      "nosotros": "montamos",
+      "vosotros": "montáis",
+      "ellos": "montan"
+    }
+  },
+  "nadar": {
+    "en": "to swim",
+    "conj": {
+      "yo": "nado",
+      "tu": "nadas",
+      "el": "nada",
+      "nosotros": "nadamos",
+      "vosotros": "nadáis",
+      "ellos": "nadan"
+    }
+  },
+  "necesitar": {
+    "en": "to need",
+    "conj": {
+      "yo": "necesito",
+      "tu": "necesitas",
+      "el": "necesita",
+      "nosotros": "necesitamos",
+      "vosotros": "necesitáis",
+      "ellos": "necesitan"
+    }
+  },
+  "observar": {
+    "en": "to observe",
+    "conj": {
+      "yo": "observo",
+      "tu": "observas",
+      "el": "observa",
+      "nosotros": "observamos",
+      "vosotros": "observáis",
+      "ellos": "observan"
+    }
+  },
+  "odiar": {
+    "en": "to hate, despise",
+    "conj": {
+      "yo": "odio",
+      "tu": "odias",
+      "el": "odia",
+      "nosotros": "odiamos",
+      "vosotros": "odiáis",
+      "ellos": "odian"
+    }
+  },
+  "oír": {
+    "en": "to hear",
+    "conj": {
+      "yo": "oigo",
+      "tu": "oyes",
+      "el": "oye",
+      "nosotros": "oímos",
+      "vosotros": "oís",
+      "ellos": "oyen"
+    }
+  },
+  "ordenar": {
+    "en": "to order/to arrange",
+    "conj": {
+      "yo": "ordeno",
+      "tu": "ordenas",
+      "el": "ordena",
+      "nosotros": "ordenamos",
+      "vosotros": "ordenáis",
+      "ellos": "ordenan"
+    }
+  },
+  "pagar": {
+    "en": "to pay",
+    "conj": {
+      "yo": "pago",
+      "tu": "pagas",
+      "el": "paga",
+      "nosotros": "pagamos",
+      "vosotros": "pagáis",
+      "ellos": "pagan"
+    }
+  },
+  "participar": {
+    "en": "to participate",
+    "conj": {
+      "yo": "participo",
+      "tu": "participas",
+      "el": "participa",
+      "nosotros": "participamos",
+      "vosotros": "participáis",
+      "ellos": "participan"
+    }
+  },
+  "pasear": {
+    "en": "to take a walk",
+    "conj": {
+      "yo": "paseo",
+      "tu": "paseas",
+      "el": "pasea",
+      "nosotros": "paseamos",
+      "vosotros": "paseáis",
+      "ellos": "pasean"
+    }
+  },
+  "pensar": {
+    "en": "to think",
+    "conj": {
+      "yo": "pienso",
+      "tu": "piensas",
+      "el": "piensa",
+      "nosotros": "pensamos",
+      "vosotros": "pensáis",
+      "ellos": "piensan"
+    }
+  },
+  "perder": {
+    "en": "to lose",
+    "conj": {
+      "yo": "pierdo",
+      "tu": "pierdes",
+      "el": "pierde",
+      "nosotros": "perdemos",
+      "vosotros": "perdéis",
+      "ellos": "pierden"
+    }
+  },
+  "platicar": {
+    "en": "to discuss",
+    "conj": {
+      "yo": "platico",
+      "tu": "platicas",
+      "el": "platica",
+      "nosotros": "platicamos",
+      "vosotros": "platicáis",
+      "ellos": "platican"
+    }
+  },
+  "poder": {
+    "en": "to be able to",
+    "conj": {
+      "yo": "puedo",
+      "tu": "puedes",
+      "el": "puede",
+      "nosotros": "podemos",
+      "vosotros": "podéis",
+      "ellos": "pueden"
+    }
+  },
+  "poner": {
+    "en": "to put",
+    "conj": {
+      "yo": "pongo",
+      "tu": "pones",
+      "el": "pone",
+      "nosotros": "ponemos",
+      "vosotros": "ponéis",
+      "ellos": "ponen"
+    }
+  },
+  "practicar": {
+    "en": "to practice",
+    "conj": {
+      "yo": "practico",
+      "tu": "practicas",
+      "el": "practica",
+      "nosotros": "practicamos",
+      "vosotros": "practicáis",
+      "ellos": "practican"
+    }
+  },
+  "preferir": {
+    "en": "to prefer",
+    "conj": {
+      "yo": "prefiero",
+      "tu": "prefieres",
+      "el": "prefiere",
+      "nosotros": "preferimos",
+      "vosotros": "preferís",
+      "ellos": "prefieren"
+    }
+  },
+  "preguntar": {
+    "en": "to ask",
+    "conj": {
+      "yo": "pregunto",
+      "tu": "preguntas",
+      "el": "pregunta",
+      "nosotros": "preguntamos",
+      "vosotros": "preguntáis",
+      "ellos": "preguntan"
+    }
+  },
+  "prestar": {
+    "en": "to lend",
+    "conj": {
+      "yo": "presto",
+      "tu": "prestas",
+      "el": "presta",
+      "nosotros": "prestamos",
+      "vosotros": "prestáis",
+      "ellos": "prestan"
     }
   },
   "querer": {
@@ -109,8 +989,41 @@
       "ellos": "quieren"
     }
   },
+  "recordar": {
+    "en": "to remember/to remind",
+    "conj": {
+      "yo": "recuerdo",
+      "tu": "recuerdas",
+      "el": "recuerda",
+      "nosotros": "recordamos",
+      "vosotros": "recordáis",
+      "ellos": "recuerdan"
+    }
+  },
+  "regresar": {
+    "en": "to return",
+    "conj": {
+      "yo": "regreso",
+      "tu": "regresas",
+      "el": "regresa",
+      "nosotros": "regresamos",
+      "vosotros": "regresáis",
+      "ellos": "regresan"
+    }
+  },
+  "repetir": {
+    "en": "to repeat",
+    "conj": {
+      "yo": "repito",
+      "tu": "repites",
+      "el": "repite",
+      "nosotros": "repetimos",
+      "vosotros": "repetís",
+      "ellos": "repiten"
+    }
+  },
   "saber": {
-    "en": "to know (fact/skill)",
+    "en": "to know (how to)",
     "conj": {
       "yo": "sé",
       "tu": "sabes",
@@ -118,6 +1031,182 @@
       "nosotros": "sabemos",
       "vosotros": "sabéis",
       "ellos": "saben"
+    }
+  },
+  "sacar": {
+    "en": "to take out",
+    "conj": {
+      "yo": "saco",
+      "tu": "sacas",
+      "el": "saca",
+      "nosotros": "sacamos",
+      "vosotros": "sacáis",
+      "ellos": "sacan"
+    }
+  },
+  "salir": {
+    "en": "to depart",
+    "conj": {
+      "yo": "salgo",
+      "tu": "sales",
+      "el": "sale",
+      "nosotros": "salimos",
+      "vosotros": "salís",
+      "ellos": "salen"
+    }
+  },
+  "ser": {
+    "en": "to be (permanent)",
+    "conj": {
+      "yo": "soy",
+      "tu": "eres",
+      "el": "es",
+      "nosotros": "somos",
+      "vosotros": "sois",
+      "ellos": "son"
+    }
+  },
+  "tener": {
+    "en": "to have",
+    "conj": {
+      "yo": "tengo",
+      "tu": "tienes",
+      "el": "tiene",
+      "nosotros": "tenemos",
+      "vosotros": "tenéis",
+      "ellos": "tienen"
+    }
+  },
+  "terminar": {
+    "en": "to end",
+    "conj": {
+      "yo": "termino",
+      "tu": "terminas",
+      "el": "termina",
+      "nosotros": "terminamos",
+      "vosotros": "termináis",
+      "ellos": "terminan"
+    }
+  },
+  "tocar": {
+    "en": "to touch/to play an instrument",
+    "conj": {
+      "yo": "toco",
+      "tu": "tocas",
+      "el": "toca",
+      "nosotros": "tocamos",
+      "vosotros": "tocáis",
+      "ellos": "tocan"
+    }
+  },
+  "tomar": {
+    "en": "to take/to drink",
+    "conj": {
+      "yo": "tomo",
+      "tu": "tomas",
+      "el": "toma",
+      "nosotros": "tomamos",
+      "vosotros": "tomáis",
+      "ellos": "toman"
+    }
+  },
+  "trabajar": {
+    "en": "to work",
+    "conj": {
+      "yo": "trabajo",
+      "tu": "trabajas",
+      "el": "trabaja",
+      "nosotros": "trabajamos",
+      "vosotros": "trabajáis",
+      "ellos": "trabajan"
+    }
+  },
+  "traer": {
+    "en": "to bring",
+    "conj": {
+      "yo": "traigo",
+      "tu": "traes",
+      "el": "trae",
+      "nosotros": "traemos",
+      "vosotros": "traéis",
+      "ellos": "traen"
+    }
+  },
+  "venir": {
+    "en": "to come",
+    "conj": {
+      "yo": "vengo",
+      "tu": "vienes",
+      "el": "viene",
+      "nosotros": "venimos",
+      "vosotros": "venís",
+      "ellos": "vienen"
+    }
+  },
+  "ver": {
+    "en": "to see",
+    "conj": {
+      "yo": "veo",
+      "tu": "ves",
+      "el": "ve",
+      "nosotros": "vemos",
+      "vosotros": "veis",
+      "ellos": "ven"
+    }
+  },
+  "viajar": {
+    "en": "to travel",
+    "conj": {
+      "yo": "viajo",
+      "tu": "viajas",
+      "el": "viaja",
+      "nosotros": "viajamos",
+      "vosotros": "viajáis",
+      "ellos": "viajan"
+    }
+  },
+  "visitar": {
+    "en": "to visit",
+    "conj": {
+      "yo": "visito",
+      "tu": "visitas",
+      "el": "visita",
+      "nosotros": "visitamos",
+      "vosotros": "visitáis",
+      "ellos": "visitan"
+    }
+  },
+  "vivir": {
+    "en": "to live",
+    "conj": {
+      "yo": "vivo",
+      "tu": "vives",
+      "el": "vive",
+      "nosotros": "vivimos",
+      "vosotros": "vivís",
+      "ellos": "viven"
+    }
+  },
+  "volar": {
+    "en": "to fly",
+    "conj": {
+      "yo": "vuelo",
+      "tu": "vuelas",
+      "el": "vuela",
+      "nosotros": "volamos",
+      "vosotros": "voláis",
+      "ellos": "vuelan"
+    }
+  },
+  "volver": {
+    "en": "to go back/to do again",
+    "conj": {
+      "yo": "vuelvo",
+      "tu": "vuelves",
+      "el": "vuelve",
+      "nosotros": "volvemos",
+      "vosotros": "volvéis",
+      "ellos": "vuelven"
     }
   }
 }
