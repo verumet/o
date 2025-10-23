@@ -1,0 +1,123 @@
+{
+  "ser": {
+    "en": "to be (permanent)",
+    "conj": {
+      "yo": "soy",
+      "tu": "eres",
+      "el": "es",
+      "nosotros": "somos",
+      "vosotros": "sois",
+      "ellos": "son"
+    }
+  },
+  "estar": {
+    "en": "to be (location/condition)",
+    "conj": {
+      "yo": "estoy",
+      "tu": "estás",
+      "el": "está",
+      "nosotros": "estamos",
+      "vosotros": "estáis",
+      "ellos": "están"
+    }
+  },
+  "tener": {
+    "en": "to have",
+    "conj": {
+      "yo": "tengo",
+      "tu": "tienes",
+      "el": "tiene",
+      "nosotros": "tenemos",
+      "vosotros": "tenéis",
+      "ellos": "tienen"
+    }
+  },
+  "hacer": {
+    "en": "to do/to make",
+    "conj": {
+      "yo": "hago",
+      "tu": "haces",
+      "el": "hace",
+      "nosotros": "hacemos",
+      "vosotros": "hacéis",
+      "ellos": "hacen"
+    }
+  },
+  "ir": {
+    "en": "to go",
+    "conj": {
+      "yo": "voy",
+      "tu": "vas",
+      "el": "va",
+      "nosotros": "vamos",
+      "vosotros": "vais",
+      "ellos": "van"
+    }
+  },
+  "poder": {
+    "en": "to be able to (can)",
+    "conj": {
+      "yo": "puedo",
+      "tu": "puedes",
+      "el": "puede",
+      "nosotros": "podemos",
+      "vosotros": "podéis",
+      "ellos": "pueden"
+    }
+  },
+  "hablar": {
+    "en": "to talk",
+    "conj": {
+      "yo": "hablo",
+      "tu": "hablas",
+      "el": "habla",
+      "nosotros": "hablamos",
+      "vosotros": "habláis",
+      "ellos": "hablan"
+    }
+  },
+  "comer": {
+    "en": "to eat",
+    "conj": {
+      "yo": "como",
+      "tu": "comes",
+      "el": "come",
+      "nosotros": "comemos",
+      "vosotros": "coméis",
+      "ellos": "comen"
+    }
+  },
+  "vivir": {
+    "en": "to live",
+    "conj": {
+      "yo": "vivo",
+      "tu": "vives",
+      "el": "vive",
+      "nosotros": "vivimos",
+      "vosotros": "vivís",
+      "ellos": "viven"
+    }
+  },
+  "querer": {
+    "en": "to want/to love",
+    "conj": {
+      "yo": "quiero",
+      "tu": "quieres",
+      "el": "quiere",
+      "nosotros": "queremos",
+      "vosotros": "queréis",
+      "ellos": "quieren"
+    }
+  },
+  "saber": {
+    "en": "to know (fact/skill)",
+    "conj": {
+      "yo": "sé",
+      "tu": "sabes",
+      "el": "sabe",
+      "nosotros": "sabemos",
+      "vosotros": "sabéis",
+      "ellos": "saben"
+    }
+  }
+}
