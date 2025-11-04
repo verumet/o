@@ -1,0 +1,112 @@
+{
+  "bailar": {
+    "en": "to dance",
+    "conj": {
+      "yo": "bailo",
+      "tu": "bailas",
+      "el": "baila",
+      "nosotros": "bailamos",
+      "vosotros": "bailáis",
+      "ellos": "bailan"
+    }
+  },
+  "creer": {
+    "en": "to believe",
+    "conj": {
+      "yo": "creo",
+      "tu": "crees",
+      "el": "cree",
+      "nosotros": "creemos",
+      "vosotros": "creéis",
+      "ellos": "creen"
+    }
+  },
+  "deber": {
+    "en": "should/to owe",
+    "conj": {
+      "yo": "debo",
+      "tu": "debes",
+      "el": "debe",
+      "nosotros": "debemos",
+      "vosotros": "debéis",
+      "ellos": "deben"
+    }
+  },
+  "desear": {
+    "en": "to wish/to desire",
+    "conj": {
+      "yo": "deseo",
+      "tu": "deseas",
+      "el": "desea",
+      "nosotros": "deseamos",
+      "vosotros": "deseáis",
+      "ellos": "desean"
+    }
+  },
+  "dibujar": {
+    "en": "to draw",
+    "conj": {
+      "yo": "dibujo",
+      "tu": "dibujas",
+      "el": "dibuja",
+      "nosotros": "dibujamos",
+      "vosotros": "dibujáis",
+      "ellos": "dibujan"
+    }
+  },
+  "escribir": {
+    "en": "to write",
+    "conj": {
+      "yo": "escribo",
+      "tu": "escribes",
+      "el": "escribe",
+      "nosotros": "escribimos",
+      "vosotros": "escribís",
+      "ellos": "escriben"
+    }
+  },
+  "lavar": {
+    "en": "to wash",
+    "conj": {
+      "yo": "lavo",
+      "tu": "lavas",
+      "el": "lava",
+      "nosotros": "lavamos",
+      "vosotros": "laváis",
+      "ellos": "lavan"
+    }
+  },
+  "limpiar": {
+    "en": "to clean",
+    "conj": {
+      "yo": "limpio",
+      "tu": "limpias",
+      "el": "limpia",
+      "nosotros": "limpiamos",
+      "vosotros": "limpiáis",
+      "ellos": "limpian"
+    }
+  },
+  "llamar": {
+    "en": "to call",
+    "conj": {
+      "yo": "llamo",
+      "tu": "llamas",
+      "el": "llama",
+      "nosotros": "llamamos",
+      "vosotros": "llamáis",
+      "ellos": "llaman"
+    }
+  },
+  "nevar": {
+    "en": "to snow",
+    "conj": {
+      "yo": "nievo",
+      "tu": "nievas",
+      "el": "nieva",
+      "nosotros": "nevamos",
+      "vosotros": "neváis",
+      "ellos": "nievan"
+    }
+  }
+}
